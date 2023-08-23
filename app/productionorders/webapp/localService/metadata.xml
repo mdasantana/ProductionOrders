@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="ProductionOrdersService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="ProdctOrders" EntityType="ProductionOrdersService.ProdctOrders">
+                    <NavigationPropertyBinding Path="components" Target="ProdctOrdersComponents"/>
+                    <NavigationPropertyBinding Path="operations" Target="ProdctOrdersOperations"/>
+                </EntitySet>
+                <EntitySet Name="ProdctOrdersComponents" EntityType="ProductionOrdersService.ProdctOrdersComponents">
+                    <NavigationPropertyBinding Path="order" Target="ProdctOrders"/>
+                </EntitySet>
+                <EntitySet Name="ProdctOrdersOperations" EntityType="ProductionOrdersService.ProdctOrdersOperations">
+                    <NavigationPropertyBinding Path="order" Target="ProdctOrders"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="ProdctOrders">
+                <Key>
+                    <PropertyRef Name="aufnr"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="aufnr" Type="Edm.String" MaxLength="12" Nullable="false"/>
+                <Property Name="auart" Type="Edm.String" MaxLength="4"/>
+                <Property Name="autyp" Type="Edm.String" MaxLength="2"/>
+                <Property Name="rsnum" Type="Edm.String" MaxLength="10"/>
+                <Property Name="aufpl" Type="Edm.String" MaxLength="10"/>
+                <Property Name="ktext" Type="Edm.String" MaxLength="40"/>
+                <Property Name="maufnr" Type="Edm.String" MaxLength="12"/>
+                <Property Name="bukrs" Type="Edm.String" MaxLength="4"/>
+                <Property Name="werks" Type="Edm.String" MaxLength="4"/>
+                <Property Name="lgort" Type="Edm.String" MaxLength="4"/>
+                <Property Name="plnbez" Type="Edm.String" MaxLength="18"/>
+                <Property Name="plntxt" Type="Edm.String" MaxLength="40"/>
+                <Property Name="sbmng" Type="Edm.Double"/>
+                <Property Name="sbmeh" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="components" Type="Collection(ProductionOrdersService.ProdctOrdersComponents)"/>
+                <NavigationProperty Name="operations" Type="Collection(ProductionOrdersService.ProdctOrdersOperations)"/>
+                <Property Name="ernam" Type="Edm.String" MaxLength="12"/>
+                <Property Name="erdat" Type="Edm.Date"/>
+            </EntityType>
+            <EntityType Name="ProdctOrdersComponents">
+                <Key>
+                    <PropertyRef Name="rsnum"/>
+                    <PropertyRef Name="rspos"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="rsnum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="rspos" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="aufnr" Type="Edm.String" MaxLength="12"/>
+                <Property Name="kdpos" Type="Edm.String" MaxLength="4"/>
+                <Property Name="matnr" Type="Edm.String" MaxLength="18"/>
+                <Property Name="matxt" Type="Edm.String" MaxLength="40"/>
+                <Property Name="aplzl" Type="Edm.String" MaxLength="8"/>
+                <Property Name="werks" Type="Edm.String" MaxLength="4"/>
+                <Property Name="lgort" Type="Edm.String" MaxLength="4"/>
+                <Property Name="bdmng" Type="Edm.Double"/>
+                <Property Name="meins" Type="Edm.String" MaxLength="3"/>
+                <Property Name="shkzg" Type="Edm.String" MaxLength="1"/>
+                <Property Name="fmeng" Type="Edm.Boolean"/>
+                <NavigationProperty Name="order" Type="ProductionOrdersService.ProdctOrders"/>
+            </EntityType>
+            <EntityType Name="ProdctOrdersOperations">
+                <Key>
+                    <PropertyRef Name="aufpl"/>
+                    <PropertyRef Name="aplzl"/>
+                </Key>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="aufpl" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="aplzl" Type="Edm.String" MaxLength="8" Nullable="false"/>
+                <Property Name="aufnr" Type="Edm.String" MaxLength="12"/>
+                <Property Name="vornr" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ltxa" Type="Edm.String" MaxLength="40"/>
+                <Property Name="steus" Type="Edm.String" MaxLength="4"/>
+                <Property Name="werks" Type="Edm.String" MaxLength="4"/>
+                <Property Name="sumnr" Type="Edm.String" MaxLength="8"/>
+                <NavigationProperty Name="order" Type="ProductionOrdersService.ProdctOrders"/>
+            </EntityType>
+            <Annotations Target="ProductionOrdersService.ProdctOrders/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                </Annotations>
+                <Annotations Target="ProductionOrdersService.ProdctOrders/createdBy">
+                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                    <Annotation Term="Core.Immutable" Bool="true"/>
+                    <Annotation Term="Core.Computed" Bool="true"/>
+                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                        </Annotations>
+                        <Annotations Target="ProductionOrdersService.ProdctOrders/modifiedAt">
+                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                            <Annotation Term="Core.Computed" Bool="true"/>
+                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                            </Annotations>
+                            <Annotations Target="ProductionOrdersService.ProdctOrders/modifiedBy">
+                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                <Annotation Term="Core.Computed" Bool="true"/>
+                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                    </Annotations>
+                                    <Annotations Target="ProductionOrdersService.ProdctOrdersComponents/createdAt">
+                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                        <Annotation Term="Core.Immutable" Bool="true"/>
+                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                        </Annotations>
+                                        <Annotations Target="ProductionOrdersService.ProdctOrdersComponents/createdBy">
+                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                            <Annotation Term="Core.Immutable" Bool="true"/>
+                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                            <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                </Annotations>
+                                                <Annotations Target="ProductionOrdersService.ProdctOrdersComponents/modifiedAt">
+                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                    <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                    </Annotations>
+                                                    <Annotations Target="ProductionOrdersService.ProdctOrdersComponents/modifiedBy">
+                                                        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                        <Annotation Term="Core.Computed" Bool="true"/>
+                                                        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                            <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                            </Annotations>
+                                                            <Annotations Target="ProductionOrdersService.ProdctOrdersOperations/createdAt">
+                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                                                                </Annotations>
+                                                                <Annotations Target="ProductionOrdersService.ProdctOrdersOperations/createdBy">
+                                                                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                    <Annotation Term="Core.Immutable" Bool="true"/>
+                                                                    <Annotation Term="Core.Computed" Bool="true"/>
+                                                                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                                                                        </Annotations>
+                                                                        <Annotations Target="ProductionOrdersService.ProdctOrdersOperations/modifiedAt">
+                                                                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                            <Annotation Term="Core.Computed" Bool="true"/>
+                                                                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                                                                            </Annotations>
+                                                                            <Annotations Target="ProductionOrdersService.ProdctOrdersOperations/modifiedBy">
+                                                                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                                                                <Annotation Term="Core.Computed" Bool="true"/>
+                                                                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                                                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                                                                    </Annotations>
+                                                                                </Schema>
+                                                                            </edmx:DataServices>
+                                                                        </edmx:Edmx>
