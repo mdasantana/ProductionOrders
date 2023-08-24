@@ -117,7 +117,10 @@ annotate POSrv.PrdOrdComponents with @(UI: {
         {Value: kdpos},
         {Value: matnr},
         {Value: matxt},
-        {Value: aplzl},
+        {
+            Value: operation.vornr,
+            Label: 'Operação',
+        },
         {Value: werks},
         {Value: lgort},
         {Value: bdmng},
