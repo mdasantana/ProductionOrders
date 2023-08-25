@@ -2,12 +2,36 @@ using {ProductionOrders as PO} from '../db/schema';
 
 @Path: 'ProductionOrders'
 service ProductionOrdersService {
-    @readonly
-    entity ProdctOrders     as projection on PO.Orders;
+    entity ProdctOrders @(restrict: [
+        {
+            grant: ['READ'],
+            to   : ['UserView'],
+        },
+        {
+            grant: ['*'],
+            to   : ['UserManager'],
+        }
+    ]) as projection on PO.Orders;
 
-    @readonly
-    entity PrdOrdComponents as projection on PO.Components;
+    entity PrdOrdComponents @(restrict: [
+        {
+            grant: ['READ'],
+            to   : ['UserView'],
+        },
+        {
+            grant: ['*'],
+            to   : ['UserManager']
+        }
+    ]) as projection on PO.Components;
 
-    @readonly
-    entity PrdOrdOperations as projection on PO.Operations;
+    entity PrdOrdOperations @(restrict: [
+        {
+            grant: ['READ'],
+            to   : ['UserView']
+        },
+        {
+            grant: ['*'],
+            to   : ['UserManager']
+        }
+    ]) as projection on PO.Operations;
 }
