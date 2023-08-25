@@ -2,11 +2,11 @@
   "scopes": [
     {
       "name": "$XSAPPNAME.UserView",
-      "description": "Perfil de visualização das ordens de produção."
+      "description": "UserView"
     },
     {
       "name": "$XSAPPNAME.UserManager",
-      "description": "Perfil de manipulação das ordens de produção."
+      "description": "UserManager"
     }
   ],
   "attributes": [],

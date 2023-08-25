@@ -59,10 +59,16 @@ resources:
       config:
         xsappname: ProductionOrders-${org}-${space}
         tenant-mode: dedicated
+        role-collections:
+          - name: "UserView-${space}"
+            description: User viewer
+            role-template-references: $XSAPPNAME.UserView
+          - name: "UserManager-${space}"
+            description: User Manager
+            role-template-references: $XSAPPNAME.UserManager
         oauth2-configuration:
           redirect-uris:
             - https://09e83b22trial-dev-ProductionOrders.cfapps.us10-001.hana.ondemand.com/login/callback
-
   - name: ProductionOrders-db
     type: com.sap.xs.hdi-container
     parameters:
